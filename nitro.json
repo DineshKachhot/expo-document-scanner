@@ -1,0 +1,23 @@
+{
+  "cxxNamespace": ["expodocumentscanner"],
+  "ios": {
+    "iosModuleName": "ExpoDocumentScanner"
+  },
+  "android": {
+    "androidNamespace": ["expodocumentscanner"],
+    "androidCxxLibName": "expodocumentscanner"
+  },
+  "autolinking": {
+    "ExpoDocumentScanner": {
+      "ios": {
+        "language": "swift",
+        "implementationClassName": "ExpoDocumentScanner"
+      },
+      "android": {
+        "language": "kotlin",
+        "implementationClassName": "ExpoDocumentScanner"
+      }
+    }
+  },
+  "ignorePaths": ["node_modules"]
+}

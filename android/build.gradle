@@ -3,7 +3,8 @@ buildscript {
     kotlinVersion: "2.0.21",
     minSdkVersion: 24,
     compileSdkVersion: 36,
-    targetSdkVersion: 36
+    targetSdkVersion: 36,
+    ndkVersion: "27.1.12297006"
   ]
 
   ext.getExtOrDefault = { prop ->
@@ -41,6 +42,7 @@ android {
   namespace "com.margelo.nitro.expodocumentscanner"
 
   compileSdkVersion getExtOrDefault("compileSdkVersion")
+  ndkVersion getExtOrDefault("ndkVersion")
 
   defaultConfig {
     minSdkVersion getExtOrDefault("minSdkVersion")

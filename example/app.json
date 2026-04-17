@@ -13,7 +13,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "expodocumentscanner.example"
+      "bundleIdentifier": "expodocumentscanner.example",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan documents."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -22,7 +25,8 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "package": "expodocumentscanner.example"
+      "package": "expodocumentscanner.example",
+      "permissions": ["CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

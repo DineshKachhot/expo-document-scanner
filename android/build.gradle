@@ -117,4 +117,5 @@ android {
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation project(":react-native-nitro-modules")
+  implementation "com.google.android.gms:play-services-mlkit-document-scanner:16.0.0-beta1"
 }

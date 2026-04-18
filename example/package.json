@@ -19,6 +19,7 @@
     "react-dom": "19.2.0",
     "react-native": "0.83.4",
     "react-native-nitro-modules": "^0.35.4",
+    "react-native-safe-area-context": "^5.7.0",
     "react-native-web": "~0.21.0"
   },
   "private": true,

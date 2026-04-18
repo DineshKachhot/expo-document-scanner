@@ -4,6 +4,7 @@ import VisionKit
 class ExpoDocumentScanner: HybridExpoDocumentScannerSpec {
 
   private var pendingPromise: Promise<ScanResult>?
+  private var pendingOptions: ScanOptions?
 
   public func scanDocument(options: ScanOptions) throws -> Promise<ScanResult> {
     guard pendingPromise == nil else {
@@ -12,6 +13,7 @@ class ExpoDocumentScanner: HybridExpoDocumentScannerSpec {
 
     let promise = Promise<ScanResult>()
     pendingPromise = promise
+    pendingOptions = options
 
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
@@ -20,6 +22,7 @@ class ExpoDocumentScanner: HybridExpoDocumentScannerSpec {
         promise.reject(withError: RuntimeError.error(
           withMessage: "Document scanning is not supported on this device."))
         self.pendingPromise = nil
+        self.pendingOptions = nil
         return
       }
 
@@ -34,6 +37,7 @@ class ExpoDocumentScanner: HybridExpoDocumentScannerSpec {
       else {
         promise.reject(withError: RuntimeError.error(withMessage: "No root view controller found."))
         self.pendingPromise = nil
+        self.pendingOptions = nil
         return
       }
 
@@ -55,27 +59,49 @@ extension ExpoDocumentScanner: VNDocumentCameraViewControllerDelegate {
     didFinishWith scan: VNDocumentCameraScan
   ) {
     controller.dismiss(animated: true)
-    guard let promise = pendingPromise else { return }
+    guard let promise = pendingPromise, let options = pendingOptions else { return }
     pendingPromise = nil
+    pendingOptions = nil
 
-    var uris: [String] = []
+    var pages: [ScannedPage] = []
     let tempDir = FileManager.default.temporaryDirectory
+    let quality = options.quality ?? 1.0
 
     for i in 0..<scan.pageCount {
       let image = scan.imageOfPage(at: i)
-      let url = tempDir.appendingPathComponent("scan_\(UUID().uuidString)_p\(i).jpg")
-      if let data = image.jpegData(compressionQuality: 0.92) {
-        do {
-          try data.write(to: url)
-          uris.append(url.absoluteString)
-        } catch {
-          promise.reject(withError: error)
-          return
-        }
+
+      let imageData: Data?
+      let ext: String
+      if quality < 1.0 {
+        imageData = image.jpegData(compressionQuality: quality)
+        ext = "jpg"
+      } else {
+        imageData = image.pngData()
+        ext = "png"
       }
+
+      guard let data = imageData else {
+        promise.reject(withError: RuntimeError.error(
+          withMessage: "Failed to encode image at page \(i)."))
+        return
+      }
+
+      let url = tempDir.appendingPathComponent("scan_\(UUID().uuidString)_p\(i).\(ext)")
+      do {
+        try data.write(to: url)
+      } catch {
+        promise.reject(withError: error)
+        return
+      }
+
+      let base64: String? = (options.includeBase64 == true)
+        ? data.base64EncodedString()
+        : nil
+
+      pages.append(ScannedPage(uri: url.absoluteString, base64: base64))
     }
 
-    promise.resolve(withResult: ScanResult(uris: uris))
+    promise.resolve(withResult: ScanResult(pages: pages, pdfUri: nil))
   }
 
   public func documentCameraViewControllerDidCancel(
@@ -84,6 +110,7 @@ extension ExpoDocumentScanner: VNDocumentCameraViewControllerDelegate {
     controller.dismiss(animated: true)
     pendingPromise?.reject(withError: RuntimeError.error(withMessage: "User cancelled the scan."))
     pendingPromise = nil
+    pendingOptions = nil
   }
 
   public func documentCameraViewController(
@@ -93,5 +120,6 @@ extension ExpoDocumentScanner: VNDocumentCameraViewControllerDelegate {
     controller.dismiss(animated: true)
     pendingPromise?.reject(withError: error)
     pendingPromise = nil
+    pendingOptions = nil
   }
 }

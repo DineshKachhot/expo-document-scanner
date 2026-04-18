@@ -3,9 +3,11 @@ import type {
   ExpoDocumentScanner,
   ScanOptions,
   ScanResult,
+  ScannedPage,
+  ScannerMode,
 } from './ExpoDocumentScanner.nitro';
 
-export type { ScanOptions, ScanResult };
+export type { ScanOptions, ScanResult, ScannedPage, ScannerMode };
 
 const Scanner = NitroModules.createHybridObject<ExpoDocumentScanner>(
   'ExpoDocumentScanner'

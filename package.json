@@ -1,6 +1,6 @@
 {
   "name": "expo-document-scanner",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Fast, high-quality native document scanner for React Native (Expo) using VisionKit on iOS and ML Kit on Android.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",

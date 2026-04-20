@@ -51,15 +51,18 @@ class ExpoDocumentScanner : HybridExpoDocumentScannerSpec(), ActivityEventListen
       else                         -> GmsDocumentScannerOptions.SCANNER_MODE_FULL
     }
 
-    val formats = mutableListOf(GmsDocumentScannerOptions.RESULT_FORMAT_JPEG)
-    if (options.includePdf == true) formats.add(GmsDocumentScannerOptions.RESULT_FORMAT_PDF)
-
-    val gmsOptions = GmsDocumentScannerOptions.Builder()
+    val gmsOptionsBuilder = GmsDocumentScannerOptions.Builder()
       .setScannerMode(scannerMode)
       .setGalleryImportAllowed(options.galleryImportAllowed == true)
       .setPageLimit(options.maxNumDocuments?.toInt() ?: 100)
-      .setResultFormats(*formats.toIntArray())
-      .build()
+
+    if (options.includePdf == true) {
+      gmsOptionsBuilder.setResultFormats(GmsDocumentScannerOptions.RESULT_FORMAT_JPEG, GmsDocumentScannerOptions.RESULT_FORMAT_PDF)
+    } else {
+      gmsOptionsBuilder.setResultFormats(GmsDocumentScannerOptions.RESULT_FORMAT_JPEG)
+    }
+
+    val gmsOptions = gmsOptionsBuilder.build()
 
     GmsDocumentScanning.getClient(gmsOptions)
       .getStartScanIntent(activity)

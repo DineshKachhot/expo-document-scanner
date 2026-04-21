@@ -4,9 +4,6 @@
   "description": "Fast, high-quality native document scanner for React Native (Expo) using VisionKit on iOS and ML Kit on Android.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
-  "expo": {
-    "configPlugin": "./app.plugin.js"
-  },
   "exports": {
     ".": {
       "source": "./src/index.tsx",
@@ -23,7 +20,6 @@
     "nitrogen",
     "nitro.json",
     "*.podspec",
-    "app.plugin.js",
     "!ios/build",
     "!android/build",
     "!android/gradle",
@@ -64,7 +60,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@expo/config-plugins": "^9.0.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@eslint/compat": "^2.0.3",
     "@eslint/eslintrc": "^3.3.5",

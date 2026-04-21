@@ -5,6 +5,7 @@ class ExpoDocumentScanner: HybridExpoDocumentScannerSpec {
 
   private var pendingPromise: Promise<ScanResult>?
   private var pendingOptions: ScanOptions?
+  private lazy var cameraDelegate = ScannerDelegate(scanner: self)
 
   public func scanDocument(options: ScanOptions) throws -> Promise<ScanResult> {
     guard pendingPromise == nil else {
@@ -27,7 +28,7 @@ class ExpoDocumentScanner: HybridExpoDocumentScannerSpec {
       }
 
       let scanner = VNDocumentCameraViewController()
-      scanner.delegate = self
+      scanner.delegate = self.cameraDelegate
 
       // Find the topmost presented view controller
       guard let windowScene = UIApplication.shared.connectedScenes
@@ -48,16 +49,10 @@ class ExpoDocumentScanner: HybridExpoDocumentScannerSpec {
 
     return promise
   }
-}
 
-// MARK: - VNDocumentCameraViewControllerDelegate
+  // MARK: - Delegate callbacks
 
-extension ExpoDocumentScanner: VNDocumentCameraViewControllerDelegate {
-
-  public func documentCameraViewController(
-    _ controller: VNDocumentCameraViewController,
-    didFinishWith scan: VNDocumentCameraScan
-  ) {
+  fileprivate func handleFinish(scan: VNDocumentCameraScan, controller: VNDocumentCameraViewController) {
     controller.dismiss(animated: true)
     guard let promise = pendingPromise, let options = pendingOptions else { return }
     pendingPromise = nil
@@ -104,22 +99,48 @@ extension ExpoDocumentScanner: VNDocumentCameraViewControllerDelegate {
     promise.resolve(withResult: ScanResult(pages: pages, pdfUri: nil))
   }
 
-  public func documentCameraViewControllerDidCancel(
-    _ controller: VNDocumentCameraViewController
-  ) {
+  fileprivate func handleCancel(controller: VNDocumentCameraViewController) {
     controller.dismiss(animated: true)
     pendingPromise?.reject(withError: RuntimeError.error(withMessage: "User cancelled the scan."))
     pendingPromise = nil
     pendingOptions = nil
   }
 
-  public func documentCameraViewController(
-    _ controller: VNDocumentCameraViewController,
-    didFailWithError error: Error
-  ) {
+  fileprivate func handleError(error: Error, controller: VNDocumentCameraViewController) {
     controller.dismiss(animated: true)
     pendingPromise?.reject(withError: error)
     pendingPromise = nil
     pendingOptions = nil
+  }
+}
+
+// MARK: - VNDocumentCameraViewControllerDelegate
+
+private class ScannerDelegate: NSObject, VNDocumentCameraViewControllerDelegate {
+
+  weak var scanner: ExpoDocumentScanner?
+
+  init(scanner: ExpoDocumentScanner) {
+    self.scanner = scanner
+  }
+
+  func documentCameraViewController(
+    _ controller: VNDocumentCameraViewController,
+    didFinishWith scan: VNDocumentCameraScan
+  ) {
+    scanner?.handleFinish(scan: scan, controller: controller)
+  }
+
+  func documentCameraViewControllerDidCancel(
+    _ controller: VNDocumentCameraViewController
+  ) {
+    scanner?.handleCancel(controller: controller)
+  }
+
+  func documentCameraViewController(
+    _ controller: VNDocumentCameraViewController,
+    didFailWithError error: Error
+  ) {
+    scanner?.handleError(error: error, controller: controller)
   }
 }

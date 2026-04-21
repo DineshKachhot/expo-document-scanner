@@ -74,19 +74,16 @@ yarn add expo-document-scanner react-native-nitro-modules
 
 ### Expo Setup
 
-Add the library to your `plugins` in `app.json` (or `app.config.js`) to configure the camera usage description:
+For Expo, you need to add the camera usage description to your `app.json` (or `app.config.js`):
 
 ```json
 {
   "expo": {
-    "plugins": [
-      [
-        "expo-document-scanner",
-        {
-          "cameraPermission": "This app uses the camera to scan documents."
-        }
-      ]
-    ]
+    "ios": {
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan documents."
+      }
+    }
   }
 }
 ```

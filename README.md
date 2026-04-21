@@ -11,9 +11,13 @@ A fast, high-quality document scanner for React Native, built as a [Nitro Module
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+  - [Expo](#expo-installation)
+  - [Bare React Native](#bare-react-native-installation)
 - [Setup](#setup)
-  - [iOS Setup](#ios-setup)
-  - [Android Setup](#android-setup)
+  - [Expo Setup](#expo-setup)
+  - [Bare React Native Setup](#bare-react-native-setup)
+    - [iOS Setup](#ios-setup)
+    - [Android Setup](#android-setup)
 - [Usage](#usage)
 - [API Reference](#api-reference)
   - [scanDocument(options)](#scandocumentoptions)
@@ -48,6 +52,14 @@ A fast, high-quality document scanner for React Native, built as a [Nitro Module
 
 ## Installation
 
+### Expo Installation
+
+```sh
+npx expo install expo-document-scanner react-native-nitro-modules
+```
+
+### Bare React Native Installation
+
 ```sh
 # npm
 npm install expo-document-scanner react-native-nitro-modules
@@ -60,7 +72,38 @@ yarn add expo-document-scanner react-native-nitro-modules
 
 ## Setup
 
-### iOS Setup
+### Expo Setup
+
+Add the library to your `plugins` in `app.json` (or `app.config.js`) to configure the camera usage description:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      [
+        "expo-document-scanner",
+        {
+          "cameraPermission": "This app uses the camera to scan documents."
+        }
+      ]
+    ]
+  }
+}
+```
+
+Since this library uses native code via Nitro Modules, it requires the [New Architecture](https://docs.expo.dev/guides/new-architecture/) and must be used with [Development Builds](https://docs.expo.dev/develop/development-builds/introduction/). It will not work in Expo Go.
+
+To build your development build:
+
+```sh
+npx expo run:ios
+# or
+npx expo run:android
+```
+
+### Bare React Native Setup
+
+#### iOS Setup
 
 Run pod install after installing the package:
 
@@ -81,7 +124,7 @@ VisionKit is a system framework — no additional dependencies, entitlements, or
 
 ---
 
-### Android Setup
+#### Android Setup
 
 **Ensure Google Play Services is available.**
 

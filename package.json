@@ -55,7 +55,7 @@
   "bugs": {
     "url": "https://github.com/DineshKachhot/expo-document-scanner/issues"
   },
-  "homepage": "https://github.com/DineshKachhot/expo-document-scanner#readme",
+  "homepage": "https://expo-document-scanner.dinesh-kachhot.workers.dev/",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

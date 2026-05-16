@@ -63,7 +63,7 @@ export default function App() {
       <StatusBar barStyle="dark-content" backgroundColor="#F4F6F9" />
       <FlatList
         data={pages}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         numColumns={2}
         contentContainerStyle={styles.container}
         columnWrapperStyle={pages.length > 0 ? styles.grid : undefined}
@@ -176,7 +176,7 @@ export default function App() {
                 Tap the scan button above to digitize your first document.
               </Text>
             </View>
-          ) : null
+          ) : undefined
         }
         renderItem={({ item }) => (
           <TouchableOpacity

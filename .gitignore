@@ -86,3 +86,7 @@ android/generated
 nitrogen/
 
 .yarn
+
+# Docs
+.rspress
+doc_build

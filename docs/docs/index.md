@@ -4,7 +4,7 @@ pageType: home
 hero:
   name: Expo Document Scanner
   text: Powerful document scanning for Expo apps.
-  tagline: Lightning-fast, zero-bridge overhead scanning powered by Nitro Modules.
+  tagline: Fast, high-quality native document scanner for React Native (Expo) using VisionKit on iOS and ML Kit on Android.
   image:
     src: /hero.svg
     alt: Expo Document Scanner with Nitro

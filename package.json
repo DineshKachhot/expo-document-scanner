@@ -94,8 +94,7 @@
     "react-native-nitro-modules": "^0.35.4"
   },
   "workspaces": [
-    "example",
-    "docs"
+    "example"
   ],
   "packageManager": "yarn@4.11.0",
   "react-native-builder-bob": {

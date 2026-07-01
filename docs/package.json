@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "rspress dev",
     "build": "rspress build",
-    "preview": "rspress preview"
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
-    "@rspress/core": "latest"
+    "@rspress/core": "latest",
+    "wrangler": "^4.106.0"
   }
 }

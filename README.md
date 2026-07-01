@@ -1,7 +1,7 @@
 # expo-document-scanner
 
 [![Documentation](https://img.shields.io/badge/📖_Read_the_Docs-blue?style=for-the-badge)](https://expo-document-scanner.dinesh-kachhot.workers.dev/)
-[![Demo Video](https://img.shields.io/badge/🎥_Watch_Demo-red?style=for-the-badge)](https://github.com/DineshKachhot/expo-document-scanner/raw/main/media/ExpoDocumentScannerDemo.mp4)
+[![Demo Video](https://img.shields.io/badge/🎥_Watch_Demo-red?style=for-the-badge)](https://github.com/user-attachments/assets/bbee4a25-2060-48e5-8a4f-aa3fb700f68b)
 
 A fast, high-quality document scanner for React Native, built as a [Nitro Module](https://nitro.margelo.com). Uses Apple **VisionKit** on iOS and Google **ML Kit** on Android — both fully native, zero JavaScript image processing.
 
@@ -14,9 +14,7 @@ A fast, high-quality document scanner for React Native, built as a [Nitro Module
 
 Here is a demo video showing the native document scanner in action:
 
-<video src="https://github.com/DineshKachhot/expo-document-scanner/raw/main/media/ExpoDocumentScannerDemo.mp4" width="300" controls muted playsinline></video>
-
-_If the video does not play, you can [watch it directly here](https://github.com/DineshKachhot/expo-document-scanner/raw/main/media/ExpoDocumentScannerDemo.mp4)._
+<video src="https://github.com/user-attachments/assets/bbee4a25-2060-48e5-8a4f-aa3fb700f68b" width="300" controls muted playsinline></video>
 
 ---
 

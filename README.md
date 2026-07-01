@@ -1,6 +1,7 @@
 # expo-document-scanner
 
 [![Documentation](https://img.shields.io/badge/📖_Read_the_Docs-blue?style=for-the-badge)](https://expo-document-scanner.dinesh-kachhot.workers.dev/)
+[![Demo Video](https://img.shields.io/badge/🎥_Watch_Demo-red?style=for-the-badge)](media/ExpoDocumentScannerDemo.mp4)
 
 A fast, high-quality document scanner for React Native, built as a [Nitro Module](https://nitro.margelo.com). Uses Apple **VisionKit** on iOS and Google **ML Kit** on Android — both fully native, zero JavaScript image processing.
 
@@ -9,8 +10,19 @@ A fast, high-quality document scanner for React Native, built as a [Nitro Module
 
 ---
 
+## Demo
+
+Here is a demo video showing the native document scanner in action:
+
+<video src="media/ExpoDocumentScannerDemo.mp4" width="300" controls muted playsinline></video>
+
+_If the video does not play, you can [watch it directly here](media/ExpoDocumentScannerDemo.mp4)._
+
+---
+
 ## Table of Contents
 
+- [Demo](#demo)
 - [Requirements](#requirements)
 - [Installation](#installation)
   - [Expo](#expo-installation)

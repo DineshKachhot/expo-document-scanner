@@ -6,17 +6,13 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "expodocumentscanner.example",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to scan documents."
-      }
+      },
+      "appleTeamId": "PR4YM2TJJW"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,10 +22,23 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "package": "expodocumentscanner.example",
-      "permissions": ["CAMERA"]
+      "permissions": [
+        "CAMERA"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ]
   }
 }

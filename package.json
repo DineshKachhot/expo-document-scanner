@@ -84,12 +84,12 @@
     "eslint-plugin-prettier": "^5.5.5",
     "jest": "^30.3.0",
     "lefthook": "^2.1.4",
-    "nitrogen": "^0.35.4",
+    "nitrogen": "^0.37.1",
     "prettier": "^3.8.1",
     "react": "19.2.0",
     "react-native": "0.83.4",
     "react-native-builder-bob": "^0.41.0",
-    "react-native-nitro-modules": "^0.35.4",
+    "react-native-nitro-modules": "^0.37.1",
     "release-it": "^19.2.4",
     "turbo": "^2.8.21",
     "typescript": "^6.0.2"
@@ -97,7 +97,7 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-nitro-modules": "^0.35.4"
+    "react-native-nitro-modules": "^0.37.0"
   },
   "workspaces": [
     "example"

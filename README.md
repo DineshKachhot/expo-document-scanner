@@ -56,7 +56,7 @@ Here is a demo video showing the native document scanner in action:
 | iOS | 13.0 | VisionKit ships with iOS 13+ |
 | Android | API 24 (Android 7.0) | Requires Google Play Services |
 | React Native | 0.76+ | New Architecture required |
-| react-native-nitro-modules | ^0.35.4 | Peer dependency |
+| react-native-nitro-modules | ^0.37.0 | Peer dependency |
 
 > **New Architecture only.** This library is built with Nitro Modules, which requires the React Native New Architecture (Fabric + TurboModules). It will not work with the old bridge.
 

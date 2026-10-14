@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "expo-document-scanner",
+  "compatibility_date": "2026-07-01",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "doc_build"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
